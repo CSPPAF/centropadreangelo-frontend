@@ -1,0 +1,71 @@
+'use client'
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const images = [
+  "/lar/lar.jpg",
+  "/lar/lar1.jpg",
+  "/lar/lar2.jpg",
+  "/lar/lar3.jpg",
+  "/lar/lar4.jpg",
+  "/lar/lar5.jpg",
+  "/lar/lar6.jpg",
+  "/lar/lar7.jpg",
+  "/lar/lar8.jpg",
+  "/lar/lar9.jpg",
+  "/lar/lar10.jpg",
+  "/lar/lar11.jpg",
+  "/lar/lar12.jpg",
+  "/lar/lar13.jpg",
+  "/lar/lar14.jpg",
+  "/lar/lar15.jpg",
+  "/lar/lar16.jpg",
+  "/lar/lar17.jpg",
+  "/lar/lar18.jpg",
+  "/lar/lar19.jpg",
+  "/lar/lar20.jpg",
+  "/lar/lar21.jpg",
+  "/lar/lar22.jpg",
+  "/lar/lar23.jpg",
+];
+
+export default function Carousel() {
+  const [index, setIndex] = useState(0);
+
+  const next = () => setIndex((index + 1) % images.length);
+  const prev = () => setIndex((index - 1 + images.length) % images.length);
+
+  return (
+    <div className="relative w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg">
+      <div className="aspect-[3/2] bg-gray-200">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={images[index]}
+            src={images[index]}
+            alt={`Imagem ${index + 1}`}
+            className="object-cover w-full h-full"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.5 }}
+          />
+        </AnimatePresence>
+      </div>
+
+      <button
+        onClick={prev}
+        className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/70 p-2 rounded-full shadow hover:bg-white transition"
+      >
+        <ChevronLeft className="w-6 h-6 text-gray-800" />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/70 p-2 rounded-full shadow hover:bg-white transition"
+      >
+        <ChevronRight className="w-6 h-6 text-gray-800" />
+      </button>
+    </div>
+  );
+}

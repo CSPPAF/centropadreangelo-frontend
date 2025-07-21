@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Denuncia {
+  id            Int      @id @default(autoincrement())
+  vinculo       String
+  tipoVinculo   String?
+  denuncia      String
+  departamento  String?
+  identificacao String?
+  anonimo       Boolean
+  nome          String?
+  contacto      String?
+  email         String?
+  fotoPath      String?   // <- caminho do ficheiro de imagem
+  anexoPath     String?   // <- caminho de outro anexo
+  createdAt     DateTime @default(now())
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  nif       String   @unique // ← será usado para login
+  email     String   @unique // ← para recuperação de senha
+  password  String   // hashed
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+}
