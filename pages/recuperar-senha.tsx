@@ -1,46 +1,69 @@
-import { useState } from "react"
+"use client";
+
+import { useState } from "react";
+import styles from "./login.module.css";
 
 export default function RecuperarSenha() {
-  const [email, setEmail] = useState("")
-  const [mensagem, setMensagem] = useState("")
+  const [email, setEmail] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+    setLoading(true);
 
     const res = await fetch("/api/recuperar-senha", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
-    })
+    });
 
-    const data = await res.json()
-    setMensagem(data.message)
-  }
+    const data = await res.json();
+    setMensagem(data.message);
+    setLoading(false);
+  };
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center mb-6">Recuperar Palavra-passe</h1>
+    <div className={styles.container}>
+      <div className={styles["login-wrapper"]}>
+        <div className={styles["img-side"]}>
+          <img src="/logo.png" alt="Recuperar senha" />
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="email"
-            placeholder="O seu email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded transition"
-          >
-            Recuperar
-          </button>
-        </form>
+        <div className={styles["form-side"]}>
+          <h2 className={styles.title}>Recuperar Palavra-passe</h2>
+          <p className={styles.subtitle}>Insira seu email para receber instruções</p>
 
-        {mensagem && <p className="mt-4 text-sm text-center text-green-600">{mensagem}</p>}
+          <form onSubmit={handleSubmit}>
+            <div className={styles["input-group"]}>
+              <input
+                type="email"
+                placeholder="O seu email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={styles.input}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={loading}
+            >
+              {loading ? "Enviando..." : "Recuperar"}
+            </button>
+
+            {mensagem && (
+              <p
+                style={{ marginTop: "15px", textAlign: "center", color: "#2e7d32" }}
+              >
+                {mensagem}
+              </p>
+            )}
+          </form>
+        </div>
       </div>
-    </main>
-  )
+    </div>
+  );
 }

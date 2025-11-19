@@ -19,13 +19,13 @@ model Denuncia {
   tipoVinculo   String?
   denuncia      String
   departamento  String?
-  identificacao String?
+  identificacao String?  // armazenado encriptado
   anonimo       Boolean
-  nome          String?
-  contacto      String?
-  email         String?
-  fotoPath      String?   // <- caminho do ficheiro de imagem
-  anexoPath     String?   // <- caminho de outro anexo
+  nome          String?  // armazenado encriptado
+  contacto      String?  // armazenado encriptado
+  email         String?  // armazenado encriptado
+  fotoPath      String?
+  anexoPath     String?
   createdAt     DateTime @default(now())
 }
 

@@ -59,15 +59,7 @@ export default function HomePage() {
 						 href="/login"
 						 className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition"
 					>
-						 Área Reservada Teste
-					</a>
-					<a
-						href="https://gestao.centropadreangelo.pt/login/"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition"
-					>
-						Área Reservada
+						 Área Reservada
 					</a>
 				</div>
 			</header>

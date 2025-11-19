@@ -24,6 +24,8 @@ export default function FormularioDenuncia() {
     email: "",
   })
 
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+
   // Refs para os inputs de ficheiro
   const fotoRef = useRef<HTMLInputElement>(null)
   const anexoRef = useRef<HTMLInputElement>(null)
@@ -34,6 +36,7 @@ export default function FormularioDenuncia() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setStatus("loading")
 
     const formData = new FormData()
 
@@ -60,7 +63,18 @@ export default function FormularioDenuncia() {
       })
 
       if (res.ok) {
-        alert("Denúncia enviada com sucesso!")
+        // Envia email notificando nova denúncia
+        const emailRes = await fetch("/api/denunciaemail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        })
+
+        if (!emailRes.ok) {
+          console.error("Erro ao enviar email de notificação")
+        }
+
+        setStatus("success")
 
         // Limpa formulário
         setForm({
@@ -78,11 +92,11 @@ export default function FormularioDenuncia() {
         if (fotoRef.current) fotoRef.current.value = ""
         if (anexoRef.current) anexoRef.current.value = ""
       } else {
-        alert("Erro ao enviar denúncia.")
+        setStatus("error")
       }
     } catch (error) {
       console.error("Erro ao comunicar com servidor:", error)
-      alert("Erro ao comunicar com o servidor.")
+      setStatus("error")
     }
   }
 
@@ -98,16 +112,17 @@ export default function FormularioDenuncia() {
 
         <form onSubmit={handleSubmit} className="space-y-4 text-sm text-gray-800" encType="multipart/form-data">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-			<div>
-			  <Label htmlFor="foto">Foto</Label>
-			  <Input id="foto" name="foto" type="file" ref={fotoRef} />
-			</div>
+            <div>
+              <Label htmlFor="foto">Foto</Label>
+              <Input id="foto" name="foto" type="file" ref={fotoRef} />
+            </div>
 
-			<div>
-			  <Label htmlFor="anexo">Anexo</Label>
-			  <Input id="anexo" name="anexo" type="file" ref={anexoRef} />
-			 </div>
-		  </div>
+            <div>
+              <Label htmlFor="anexo">Anexo</Label>
+              <Input id="anexo" name="anexo" type="file" ref={anexoRef} />
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label>Trabalha no Centro Padre Ângelo?</Label>
@@ -149,35 +164,37 @@ export default function FormularioDenuncia() {
               placeholder="Escreva aqui a denúncia..."
             />
           </div>
-		  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-			  <div>
-				<Label>Área do assunto</Label>
-				<Select onValueChange={(value) => handleChange("departamento", value)}>
-				  <SelectTrigger>
-					<SelectValue placeholder="Selecione..." />
-				  </SelectTrigger>
-				  <SelectContent>
-					<SelectItem value="Direção">Direção</SelectItem>
-					<SelectItem value="Infância">Área Infância</SelectItem>
-					<SelectItem value="Sénior">Área Sénior</SelectItem>
-					<SelectItem value="Financeiro">Serviço Administrativo e Financeiro</SelectItem>
-					<SelectItem value="Logistico">Serviço Logístico</SelectItem>
-					<SelectItem value="Psicologia">Serviço de Desenvolvimento Pessoal e Social</SelectItem>
-				  </SelectContent>
-				</Select>
-			  </div>
 
-			  <div>
-				<Label htmlFor="identificacao">Quem está envolvido?</Label>
-				<Input
-				  id="identificacao"
-				  name="identificacao"
-				  value={form.identificacao}
-				  onChange={(e) => handleChange("identificacao", e.target.value)}
-				  placeholder="Identificação"
-				/>
-			  </div>
-		  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label>Área do assunto</Label>
+              <Select onValueChange={(value) => handleChange("departamento", value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Direção">Direção</SelectItem>
+                  <SelectItem value="Infância">Área Infância</SelectItem>
+                  <SelectItem value="Sénior">Área Sénior</SelectItem>
+                  <SelectItem value="Financeiro">Serviço Administrativo e Financeiro</SelectItem>
+                  <SelectItem value="Logistico">Serviço Logístico</SelectItem>
+                  <SelectItem value="Psicologia">Serviço de Desenvolvimento Pessoal e Social</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label htmlFor="identificacao">Quem está envolvido?</Label>
+              <Input
+                id="identificacao"
+                name="identificacao"
+                value={form.identificacao}
+                onChange={(e) => handleChange("identificacao", e.target.value)}
+                placeholder="Identificação"
+              />
+            </div>
+          </div>
+
           <div className="flex items-center space-x-2">
             <Switch checked={anonimo} onCheckedChange={setAnonimo} />
             <Label>Quero permanecer anónimo</Label>
@@ -232,9 +249,25 @@ export default function FormularioDenuncia() {
             Clique <PoliticaPrivacidade /> para ler a Política de Privacidade
           </p>
 
-          <div className="flex justify-between">
-            <Button type="reset" variant="outline">Limpar</Button>
-            <Button type="submit">Enviar</Button>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-2">
+            <Button type="reset" variant="outline" disabled={status === "loading"}>
+              Limpar
+            </Button>
+            <div className="flex flex-col items-center">
+              <Button
+                type="submit"
+                disabled={status === "loading"}
+                className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+              >
+                {status === "loading" ? "Enviando..." : "Enviar"}
+              </Button>
+              {status === "success" && (
+                <p className="text-green-600 mt-2">Denúncia enviada com sucesso!</p>
+              )}
+              {status === "error" && (
+                <p className="text-red-600 mt-2">Erro ao enviar denúncia. Tente novamente.</p>
+              )}
+            </div>
           </div>
         </form>
       </DialogContent>
