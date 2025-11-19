@@ -18,7 +18,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  // Garante que a pasta /uploads existe
   fs.mkdirSync(path.join(process.cwd(), "/public/uploads"), { recursive: true });
 
   const form = new IncomingForm({
@@ -50,18 +49,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const fotoPath = fotoFile ? `/uploads/${path.basename(fotoFile.filepath)}` : null;
       const anexoPath = anexoFile ? `/uploads/${path.basename(anexoFile.filepath)}` : null;
-	  // Normaliza anonimo para uma string ou boolean coerente
-	  const anonimoValueRaw = Array.isArray(anonimo) ? anonimo[0] : anonimo;
-	  const anonimoValue = anonimoValueRaw === "true" || anonimoValueRaw === true;
-	  
-	  // Normaliza "anonimo" para boolean
-	  let anonimoValue = false;
 
-	  if (Array.isArray(anonimo)) {
-	    anonimoValue = anonimo[0] === "true";
-	  } else if (typeof anonimo === "string") {
-	    anonimoValue = anonimo === "true";
-	  }
+      // Normaliza anonimo corretamente para boolean
+      let anonimoValue = false;
+
+      if (Array.isArray(anonimo)) {
+        anonimoValue = anonimo[0] === "true";
+      } else if (typeof anonimo === "string") {
+        anonimoValue = anonimo === "true";
+      }
 
       const novaDenuncia = await prisma.denuncia.create({
         data: {
@@ -70,10 +66,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           denuncia: String(denuncia),
           departamento: departamento ? String(departamento) : null,
           identificacao: identificacao ? encrypt(String(identificacao)) : null,
+
           anonimo: anonimoValue,
-		  nome: anonimoValue ? null : nome ? encrypt(String(nome)) : null,
-		  contacto: anonimoValue ? null : contacto ? encrypt(String(contacto)) : null,
-		  email: anonimoValue ? null : email ? encrypt(String(email)) : null,
+
+          nome: anonimoValue ? null : nome ? encrypt(String(nome)) : null,
+          contacto: anonimoValue ? null : contacto ? encrypt(String(contacto)) : null,
+          email: anonimoValue ? null : email ? encrypt(String(email)) : null,
+
           fotoPath,
           anexoPath,
         },
