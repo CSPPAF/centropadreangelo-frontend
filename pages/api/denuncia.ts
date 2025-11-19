@@ -53,6 +53,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	  // Normaliza anonimo para uma string ou boolean coerente
 	  const anonimoValueRaw = Array.isArray(anonimo) ? anonimo[0] : anonimo;
 	  const anonimoValue = anonimoValueRaw === "true" || anonimoValueRaw === true;
+	  
+	  // Normaliza "anonimo" para boolean
+	  let anonimoValue = false;
+
+	  if (Array.isArray(anonimo)) {
+	    anonimoValue = anonimo[0] === "true";
+	  } else if (typeof anonimo === "string") {
+	    anonimoValue = anonimo === "true";
+	  }
 
       const novaDenuncia = await prisma.denuncia.create({
         data: {
