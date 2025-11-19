@@ -58,7 +58,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           denuncia: String(denuncia),
           departamento: departamento ? String(departamento) : null,
           identificacao: identificacao ? encrypt(String(identificacao)) : null,
-          anonimo: anonimo === "true" || anonimo === true,
+          anonimo: Array.isArray(anonimo)
+		  ? anonimo[0] === "true"
+		  : anonimo === "true" || anonimo === true,
           nome: anonimo === "true" ? null : nome ? encrypt(String(nome)) : null,
           contacto: anonimo === "true" ? null : contacto ? encrypt(String(contacto)) : null,
           email: anonimo === "true" ? null : email ? encrypt(String(email)) : null,
