@@ -68,7 +68,30 @@ export default function HomePage() {
 			      Área Reservada
 			    </a>
 			  </div>
-			
+
+			  {/* Esquerda: Logo + Nome */}
+			  <div className="flex items-center gap-4 flex-nowrap min-w-0">
+				<img
+				  src="/logo.png"
+				  alt="Logo"
+				  className="h-16 w-auto md:h-24"
+				/>
+
+				<h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight flex-1 min-w-0">
+				  Centro Social Paroquial Padre Ângelo Ferreira Pinto
+				</h1>
+			  </div>
+
+			  {/* Direita: Botão Área Reservada */}
+			  <div className="w-full md:w-auto flex justify-start md:justify-end">
+				<a
+				  href="/login"
+				  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition w-full md:w-auto text-center"
+				>
+				  Área Reservada
+				</a>
+			  </div>
+
 			</header>
 
 			{/* Galeria */}
