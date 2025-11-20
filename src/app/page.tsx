@@ -717,7 +717,7 @@ export default function HomePage() {
 						</p>
 					</div>
 					<div className="mt-16">
-						<Carousel1 />
+						<Carousel />
 					</div>
 				</section>
 				
@@ -797,7 +797,7 @@ export default function HomePage() {
 						</p>
 					</div>
 					<div className="mt-16">
-						<Carousel1 />
+						<Carousel />
 					</div>
 				</section>
 	  
