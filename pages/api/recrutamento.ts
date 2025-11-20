@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { IncomingForm, File } from 'formidable'
 import nodemailer from 'nodemailer'
 import fs from 'fs'
-import path from 'path'
 
 // Desativa o body parser de Next.js
 export const config = {
@@ -25,18 +24,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const { nomecompleto, nascimento, email, telefone, cargo, apresentacao } = fields
-    const rawCurriculo = files.curriculo;
-	let curriculo: File | undefined;
-<<<<<<< HEAD
-	
-=======
+    const rawCurriculo = files.curriculo
+    let curriculo: File | undefined
 
->>>>>>> 4225848 (Add @sanity/vision dependency and other local changes)
-	if (Array.isArray(rawCurriculo)) {
-	  curriculo = rawCurriculo[0];
-	} else {
-	  curriculo = rawCurriculo as File | undefined;
-	}
+    if (Array.isArray(rawCurriculo)) {
+      curriculo = rawCurriculo[0]
+    } else {
+      curriculo = rawCurriculo as File | undefined
+    }
 
     if (
       !nomecompleto || !nascimento || !email ||
@@ -92,18 +87,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           <p>Cara/o ${nomecompleto},</p>
           <p>Acusamos a receção da sua candidatura e agradecemos o seu interesse em fazer parte da nossa equipa.</p>
           <p>Todos os CVs são analisados e considerados quando surge uma nova oportunidade. Assim que tal aconteça será contactada/o através dos dados que forneceu no formulário.</p>
-		  <p>A apresentação de candidatura a emprego é confidencial.</p>
+          <p>A apresentação de candidatura a emprego é confidencial.</p>
           <p>Informamos que os dados fornecidos no seu CV, serão guardados na nossa base de dados durante 5 anos, apenas para efeitos de avaliação do seu curriculum para possível preenchimento de vagas.</p>
-		  <p>Os dados que ora nos deu a conhecer serão tratados, por meios automatizados ou não, nos termos previstos na política de privacidade.</p>
-		  <p>Caso não deseje a conservação da sua documentação, pode recusa-lo respondendo para o e-mail contabilidade@centropadreangelo.pt, em conformidade com a Lei nº 67/98 de Proteção de Dados Pessoais e de acordo com o Regulamento (UE) 2016/679 Do Parlamento Europeu e do Conselho de 27 de Abril de 2016.</p>
-		  <p>Se quiser desistir da Candidatura, deve enviar e-mail para contabilidade@centropadreangelo.pt.</p>
-		  
-		  <p>Com os melhores cumprimentos,</p>
-		  
-		  <p>Centro Social Paroquial Padre Ângelo Ferreira Pinto,</p>
+          <p>Os dados que ora nos deu a conhecer serão tratados, por meios automatizados ou não, nos termos previstos na política de privacidade.</p>
+          <p>Caso não deseje a conservação da sua documentação, pode recusa-lo respondendo para o e-mail contabilidade@centropadreangelo.pt, em conformidade com a Lei nº 67/98 de Proteção de Dados Pessoais e de acordo com o Regulamento (UE) 2016/679 Do Parlamento Europeu e do Conselho de 27 de Abril de 2016.</p>
+          <p>Se quiser desistir da Candidatura, deve enviar e-mail para contabilidade@centropadreangelo.pt.</p>
+          
+          <p>Com os melhores cumprimentos,</p>
+          
+          <p>Centro Social Paroquial Padre Ângelo Ferreira Pinto,</p>
 
           <hr />
-		  <p>A sua candidatura:</p>
+          <p>A sua candidatura:</p>
           <p><strong>Nome Completo:</strong> ${nomecompleto}</p>
           <p><strong>Data de nascimento:</strong> ${nascimento}</p>
           <p><strong>Email:</strong> ${email}</p>
