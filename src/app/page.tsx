@@ -21,11 +21,13 @@ const imagens = [
 
 export default function HomePage() {
 	const autoplay = useRef(
-		Autoplay(
-			{ delay: 3000, stopOnInteraction: false },
-			(emblaRoot) => emblaRoot.parentElement
-		)
-	)
+	  Autoplay({ delay: 3000, stopOnInteraction: false })
+	);
+	
+	const [emblaRef, emblaApi] = useEmblaCarousel(
+	  { loop: true },
+	  [autoplay.current]
+	);
 
 	const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current])
 
