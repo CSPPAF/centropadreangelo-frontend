@@ -29,8 +29,6 @@ export default function HomePage() {
 	  [autoplay.current]
 	)
 
-	const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [autoplay.current])
-
 	const scrollPrev = useCallback(() => {
 		if (emblaApi) emblaApi.scrollPrev()
 	}, [emblaApi])
