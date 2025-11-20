@@ -40,7 +40,7 @@ export default function Carousel1() {
         <img
           src={images[index]}
           alt={`Imagem ${index + 1}`}
-          className="object-cover w-full h-full absolute inset-0"
+          className="object-cover w-full h-full"
         />
       </div>
 
