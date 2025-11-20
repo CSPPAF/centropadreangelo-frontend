@@ -45,15 +45,16 @@ export default function HomePage() {
 		<main id="top" className="min-h-screen scroll-smooth">
 			{/* Cabeçalho */}
 			<header className="bg-white shadow-md py-4 px-6 flex items-center justify-between flex-wrap gap-4">
+
 			  {/* Esquerda: Logo + Nome */}
-			  <div className="flex items-center gap-4 whitespace-nowrap overflow-hidden">
+			  <div className="flex items-center gap-4 flex-nowrap min-w-0">
 			    <img
 			      src="/logo.png"
 			      alt="Logo"
 			      className="h-16 w-auto md:h-24"
 			    />
 			
-			    <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight truncate">
+			    <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight flex-1 min-w-0">
 			      Centro Social Paroquial Padre Ângelo Ferreira Pinto
 			    </h1>
 			  </div>
@@ -67,6 +68,7 @@ export default function HomePage() {
 			      Área Reservada
 			    </a>
 			  </div>
+			
 			</header>
 
 			{/* Galeria */}
