@@ -20,37 +20,28 @@ const imagens = [
 ]
 
 export default function HomePage() {
-	const autoplay = useRef(
-	  Autoplay({ delay: 3000, stopOnInteraction: false })
-<<<<<<< HEAD
-	)
-	
-	const [emblaRef, emblaApi] = useEmblaCarousel(
-	  { loop: true },
-	  [autoplay.current]
-	)
-=======
-	)
+  const autoplay = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  )
 
-	const [emblaRef, emblaApi] = useEmblaCarousel(
-	  { loop: true },
-	  [autoplay.current]
-	)
->>>>>>> 4225848 (Add @sanity/vision dependency and other local changes)
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true },
+    [autoplay.current]
+  )
 
-	const scrollPrev = useCallback(() => {
-		if (emblaApi) emblaApi.scrollPrev()
-	}, [emblaApi])
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
 
-	const scrollNext = useCallback(() => {
-		if (emblaApi) emblaApi.scrollNext()
-	}, [emblaApi])
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
-	useEffect(() => {
-		if (emblaApi) autoplay.current?.play()
-	}, [emblaApi])
+  useEffect(() => {
+    if (emblaApi) autoplay.current?.play()
+  }, [emblaApi])
 
-	return (
+  return (
 		<main id="top" className="min-h-screen scroll-smooth">
 			{/* Cabeçalho */}
 			<header className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
