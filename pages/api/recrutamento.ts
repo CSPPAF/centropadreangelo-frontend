@@ -25,7 +25,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const { nomecompleto, nascimento, email, telefone, cargo, apresentacao } = fields
-    const curriculo = files.curriculo?.[0] || files.curriculo as File
+    const rawCurriculo = files.curriculo;
+	let curriculo: File | undefined;
+	
+	if (Array.isArray(rawCurriculo)) {
+	  curriculo = rawCurriculo[0];
+	} else {
+	  curriculo = rawCurriculo as File | undefined;
+	}
 
     if (
       !nomecompleto || !nascimento || !email ||
