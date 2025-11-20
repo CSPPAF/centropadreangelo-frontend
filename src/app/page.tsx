@@ -358,7 +358,6 @@ export default function HomePage() {
 						<div className="mt-16">
 							<CarouselcrecheII />
 						</div>
-
 					</div>
 				</section>
 			  
@@ -635,9 +634,9 @@ export default function HomePage() {
 								</a>
 							</div>
 						</div>
-					</div>
-					<div className="mt-16">
-						<Carousel />
+						<div className="mt-16">
+							<Carousel />
+						</div>
 					</div>
 				</section>
 
@@ -715,9 +714,9 @@ export default function HomePage() {
 						<p className="text-gray-700">
 							Consideramos que este plano deve ser vivo e dinâmico, isto é, estar em permanente reavaliação e sujeitar-se a revisões periódicas. É fundamental assegurar que o idoso tem ao seu dispor os recursos para assegurar o seu projeto de vida.
 						</p>
-					</div>
-					<div className="mt-16">
-						<Carousel1 />
+						<div className="mt-16">
+							<Carousel1 />
+						</div>
 					</div>
 				</section>
 				
@@ -795,9 +794,9 @@ export default function HomePage() {
 						<p className="text-gray-700">
 							Consideramos que este plano deve ser vivo e dinâmico, isto é, estar em permanente reavaliação e sujeitar-se a revisões periódicas. É fundamental assegurar que o idoso tem ao seu dispor os recursos para assegurar o seu projeto de vida.
 						</p>
-					</div>
-					<div className="mt-16">
-						<Carousel1 />
+						<div className="mt-16">
+							<Carousel1 />
+						</div>
 					</div>
 				</section>
 	  
