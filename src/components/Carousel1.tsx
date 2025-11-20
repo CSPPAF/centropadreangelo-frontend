@@ -35,12 +35,12 @@ export default function Carousel1() {
   return (
     <div className="relative w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-lg">
 
-      <div className="aspect-[3/2] bg-gray-200 relative">
+      <div className="relative aspect-[3/2] bg-gray-200 overflow-hidden">
         {/* Imagem fixa sem efeitos */}
         <img
           src={images[index]}
           alt={`Imagem ${index + 1}`}
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full absolute inset-0"
         />
       </div>
 
