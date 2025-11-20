@@ -44,24 +44,29 @@ export default function HomePage() {
   return (
 		<main id="top" className="min-h-screen scroll-smooth">
 			{/* Cabeçalho */}
-			<header className="bg-white shadow-md py-4 px-6 flex items-center justify-between">
-				{/* Esquerda: Logo + Nome */}
-				<div className="flex items-center gap-4">
-					<img src="/logo.png" alt="Logo" className="h-24 w-auto" />
-					<h1 className="text-2xl font-bold text-gray-800">
-						Centro Social Paroquial Padre Ângelo Ferreira Pinto
-					</h1>
-				</div>
+			<header className="bg-white shadow-md py-4 px-6 flex items-center justify-between flex-wrap gap-4">
+			  {/* Esquerda: Logo + Nome */}
+			  <div className="flex items-center gap-4 flex-wrap">
+				<img
+				  src="/logo.png"
+				  alt="Logo"
+				  className="h-16 w-auto md:h-24" 
+				/>
 
-				{/* Direita: Botão Área Reservada */}
-				<div>
-					<a
-						 href="/login"
-						 className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition"
-					>
-						 Área Reservada
-					</a>
-				</div>
+				<h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight max-w-xs md:max-w-none">
+				  Centro Social Paroquial Padre Ângelo Ferreira Pinto
+				</h1>
+			  </div>
+
+			  {/* Direita: Botão Área Reservada */}
+			  <div className="w-full md:w-auto flex justify-start md:justify-end">
+				<a
+				  href="/login"
+				  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition w-full md:w-auto text-center"
+				>
+				  Área Reservada
+				</a>
+			  </div>
 			</header>
 
 			{/* Galeria */}
