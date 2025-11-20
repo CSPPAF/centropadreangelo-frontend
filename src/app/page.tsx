@@ -634,6 +634,8 @@ export default function HomePage() {
 								</a>
 							</div>
 						</div>
+					</div>
+					<div className="max-w-7xl mx-auto px-6">
 						<div className="mt-16">
 							<Carousel />
 						</div>
@@ -718,6 +720,11 @@ export default function HomePage() {
 							<Carousel1 />
 						</div>
 					</div>
+					<div className="max-w-7xl mx-auto px-6">
+						<div className="mt-16">
+							<Carousel1 />
+						</div>
+					</div>
 				</section>
 				
 				<section id="centro-convivio" className="py-16 bg-gray-50">
@@ -794,6 +801,8 @@ export default function HomePage() {
 						<p className="text-gray-700">
 							Consideramos que este plano deve ser vivo e dinâmico, isto é, estar em permanente reavaliação e sujeitar-se a revisões periódicas. É fundamental assegurar que o idoso tem ao seu dispor os recursos para assegurar o seu projeto de vida.
 						</p>
+					</div>
+					<div className="max-w-7xl mx-auto px-6">
 						<div className="mt-16">
 							<Carousel1 />
 						</div>
