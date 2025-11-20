@@ -27,7 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { nomecompleto, nascimento, email, telefone, cargo, apresentacao } = fields
     const rawCurriculo = files.curriculo;
 	let curriculo: File | undefined;
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 4225848 (Add @sanity/vision dependency and other local changes)
 	if (Array.isArray(rawCurriculo)) {
 	  curriculo = rawCurriculo[0];
 	} else {

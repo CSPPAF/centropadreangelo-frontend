@@ -22,12 +22,21 @@ const imagens = [
 export default function HomePage() {
 	const autoplay = useRef(
 	  Autoplay({ delay: 3000, stopOnInteraction: false })
+<<<<<<< HEAD
 	)
 	
 	const [emblaRef, emblaApi] = useEmblaCarousel(
 	  { loop: true },
 	  [autoplay.current]
 	)
+=======
+	)
+
+	const [emblaRef, emblaApi] = useEmblaCarousel(
+	  { loop: true },
+	  [autoplay.current]
+	)
+>>>>>>> 4225848 (Add @sanity/vision dependency and other local changes)
 
 	const scrollPrev = useCallback(() => {
 		if (emblaApi) emblaApi.scrollPrev()
