@@ -46,26 +46,26 @@ export default function HomePage() {
 			{/* Cabeçalho */}
 			<header className="bg-white shadow-md py-4 px-6 flex items-center justify-between flex-wrap gap-4">
 			  {/* Esquerda: Logo + Nome */}
-			  <div className="flex items-center gap-4 flex-wrap">
-				<img
-				  src="/logo.png"
-				  alt="Logo"
-				  className="h-16 w-auto md:h-24" 
-				/>
-
-				<h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight max-w-xs md:max-w-none">
-				  Centro Social Paroquial Padre Ângelo Ferreira Pinto
-				</h1>
+			  <div className="flex items-center gap-4 whitespace-nowrap overflow-hidden">
+			    <img
+			      src="/logo.png"
+			      alt="Logo"
+			      className="h-16 w-auto md:h-24"
+			    />
+			
+			    <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-tight truncate">
+			      Centro Social Paroquial Padre Ângelo Ferreira Pinto
+			    </h1>
 			  </div>
-
+			
 			  {/* Direita: Botão Área Reservada */}
 			  <div className="w-full md:w-auto flex justify-start md:justify-end">
-				<a
-				  href="/login"
-				  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition w-full md:w-auto text-center"
-				>
-				  Área Reservada
-				</a>
+			    <a
+			      href="/login"
+			      className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition w-full md:w-auto text-center"
+			    >
+			      Área Reservada
+			    </a>
 			  </div>
 			</header>
 
