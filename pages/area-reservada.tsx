@@ -22,14 +22,38 @@ export default function AreaReservada({ user }: Props) {
 
   return (
     <main className="p-4 sm:p-8 max-w-screen-md mx-auto">
-      <h1 className="text-lg sm:text-xl font-bold mb-4 text-center sm:text-left break-words">
+      <h1
+        className="
+          text-lg sm:text-xl 
+          font-bold 
+          mb-4 
+          text-center sm:text-left
+          break-words
+        "
+      >
         Bem-vindo, {user.role === "admin" ? "Administrador" : "Utilizador"}
       </h1>
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-3">
+      <div
+        className="
+          flex 
+          flex-col sm:flex-row 
+          items-center 
+          gap-4
+        "
+      >
         <button
           onClick={handleLogout}
-          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded disabled:opacity-50 w-full sm:w-auto text-center"
+          className="
+            bg-red-600 
+            hover:bg-red-700 
+            text-white 
+            px-4 py-2 
+            rounded 
+            disabled:opacity-50
+            w-full sm:w-auto 
+            text-center
+          "
           disabled={loading}
         >
           {loading ? "A terminar sessão..." : "Terminar Sessão"}
@@ -44,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   try {
     const decoded = jwt.verify(
-      token, 
+      token,
       process.env.JWT_SECRET || "segredo-super-seguro"
     )
     return { props: { user: decoded } }
